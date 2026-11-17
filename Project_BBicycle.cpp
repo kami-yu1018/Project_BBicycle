@@ -44,15 +44,42 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     MSG msg;
 
-    // メイン メッセージ ループ:
-    while (GetMessage(&msg, nullptr, 0, 0))
+    //  ゲームループ
+    while (1)
     {
-        if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
+        if (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
         {
-            TranslateMessage(&msg);
-            DispatchMessage(&msg);
+            //===================================
+            // ウィンドウメッセージ処理
+            //===================================
+            //  終了メッセージが来た時
+            if (msg.message == WM_QUIT)
+            {
+                break;
+            }
+            else
+            {
+                TranslateMessage(&msg);
+                DispatchMessage(&msg);
+            }
         }
+
+        //===================================================
+        // 以下、ゲームの処理
+        //===================================================
+        
+        //  描画先をクリア
+        float clearColor[4] = { 0.0f,0.0f,0.0f,0.0f };
+        D3D.m_deviceContext->ClearRenderTargetView(
+            D3D.m_backBufferView.Get(),
+            clearColor
+        );
+
+        //  描画結果をウィンドウに表示
+        D3D.m_swapChain->Present(1, 0);
+
     }
+    Direct3D::DeleteInstance();
 
     return (int) msg.wParam;
 }
@@ -97,15 +124,21 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
 //
 BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 {
+    int screenW = GetSystemMetrics(SM_CXSCREEN);
+    int screenH = GetSystemMetrics(SM_CYSCREEN);
+
    hInst = hInstance; // グローバル変数にインスタンス ハンドルを格納する
 
    HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
-      CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
+      0, 0, screenW, screenH, nullptr, nullptr, hInstance, nullptr);
 
    if (!hWnd)
    {
       return FALSE;
    }
+
+   Direct3D::CreateInstance();
+   D3D.Initalize(hWnd,screenW,screenH);
 
    ShowWindow(hWnd, nCmdShow);
    UpdateWindow(hWnd);
