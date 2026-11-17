@@ -4,6 +4,8 @@
 #include "framework.h"
 #include "Project_BBicycle.h"
 
+#include"DirectX.h"
+
 #define MAX_LOADSTRING 100
 
 // グローバル変数:
