@@ -5,10 +5,6 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="Hedder">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
     <Filter Include="Resource">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
@@ -16,30 +12,55 @@
     <Filter Include="Source\DirectX">
       <UniqueIdentifier>{a2473e30-4993-4c86-8cce-dd00c0674775}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\main">
+      <UniqueIdentifier>{e1d56cc4-de03-477c-987b-4e52332bb789}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hedder">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Source\main\Window">
+      <UniqueIdentifier>{c54436c1-4780-4b3b-91da-89798b771bb9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\main\Application">
+      <UniqueIdentifier>{249ffd30-6a2a-44ff-ad98-a39a5858ebae}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="framework.h">
-      <Filter>Hedder</Filter>
-    </ClInclude>
-    <ClInclude Include="targetver.h">
-      <Filter>Hedder</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource.h">
-      <Filter>Hedder</Filter>
-    </ClInclude>
-    <ClInclude Include="Project_BBicycle.h">
-      <Filter>Hedder</Filter>
-    </ClInclude>
     <ClInclude Include="DirectX.h">
       <Filter>Source\DirectX</Filter>
     </ClInclude>
+    <ClInclude Include="framework.h">
+      <Filter>Source\main</Filter>
+    </ClInclude>
+    <ClInclude Include="Project_BBicycle.h">
+      <Filter>Source\main</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>Source\main</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Source\main</Filter>
+    </ClInclude>
+    <ClInclude Include="Application.h">
+      <Filter>Source\main\Application</Filter>
+    </ClInclude>
+    <ClInclude Include="Window.h">
+      <Filter>Source\main\Window</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Project_BBicycle.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="DirectX.cpp">
       <Filter>Source\DirectX</Filter>
+    </ClCompile>
+    <ClCompile Include="Project_BBicycle.cpp">
+      <Filter>Source\main</Filter>
+    </ClCompile>
+    <ClCompile Include="Application.cpp">
+      <Filter>Source\main\Application</Filter>
+    </ClCompile>
+    <ClCompile Include="Window.cpp">
+      <Filter>Source\main\Window</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
