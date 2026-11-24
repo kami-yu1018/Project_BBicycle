@@ -7,8 +7,8 @@
 class Renderer
 {
 public:
-	Renderer();
-	~Renderer();
+	Renderer() {};
+	~Renderer() {};
 
 	bool Initialize(HWND hWindow);
 
