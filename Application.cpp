@@ -20,8 +20,9 @@ void Application::Loop()
 
 void Application::Terminate()
 {
-	window_.Terminate();
 	renderer_.Terminate();
+	window_.Terminate();
+	
 }
 
 bool Application::gameLoop()
