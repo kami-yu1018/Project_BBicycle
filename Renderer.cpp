@@ -38,6 +38,7 @@ bool  Renderer::initDeviceAndSwapChain(HWND hWindow)
 	sd.OutputWindow = hWindow;
 	sd.SampleDesc.Count = 1;
 	sd.SampleDesc.Quality = 0;
+	sd.Windowed = TRUE;
 	sd.Flags = DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH;
 
 #if defined(DEBUG)||defined(_DEBUG)

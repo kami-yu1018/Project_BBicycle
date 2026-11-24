@@ -28,7 +28,9 @@ private:
 private:
 	//	機能レベルの配列
 	static const UINT FEATURE_LEVELS_NUM = 4;
-	D3D_FEATURE_LEVEL pFeatureLevels_[FEATURE_LEVELS_NUM] = {};
+	D3D_FEATURE_LEVEL pFeatureLevels_[FEATURE_LEVELS_NUM] = 
+	{D3D_FEATURE_LEVEL_11_1,D3D_FEATURE_LEVEL_11_0,
+	D3D_FEATURE_LEVEL_10_1,D3D_FEATURE_LEVEL_10_0};
 	//	デバイス作成時に返される機能レベル
 	D3D_FEATURE_LEVEL featureLevelsSupported_;
 
