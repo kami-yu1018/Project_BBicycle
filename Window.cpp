@@ -34,9 +34,9 @@ bool Window::Initialize(HINSTANCE hInst)
     //  メインウィンドウ作成
     RECT rect;
     rect.top = 0;
-    rect.bottom = 0;
+    rect.left = 0;
     rect.right = sizeWindow_.cx;
-    rect.left = sizeWindow_.cy;
+    rect.bottom = sizeWindow_.cy;
     AdjustWindowRect(&rect, WS_OVERLAPPEDWINDOW, FALSE);
 
     hWindow_ = CreateWindow(wc_.lpszClassName, _T("ShowWindow"),
