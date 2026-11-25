@@ -31,6 +31,9 @@
     <Filter Include="Source\main\poligon">
       <UniqueIdentifier>{b3b40721-6fa0-4bf2-8f8e-098c1677a9ad}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\main\poligon\shader">
+      <UniqueIdentifier>{79dfe5aa-0816-4a2e-8096-80559b2c494d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -96,5 +99,13 @@
     <Image Include="Project_BBicycle.ico">
       <Filter>Resource</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="VertexShader.hlsl">
+      <Filter>Source\main\poligon\shader</Filter>
+    </FxCompile>
+    <FxCompile Include="PixelShader.hlsl">
+      <Filter>Source\main\poligon\shader</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>
