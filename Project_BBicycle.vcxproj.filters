@@ -25,6 +25,9 @@
     <Filter Include="Source\main\Application">
       <UniqueIdentifier>{249ffd30-6a2a-44ff-ad98-a39a5858ebae}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\main\pch">
+      <UniqueIdentifier>{dbed74f6-1bca-40da-9278-ed6cdab5d378}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -48,6 +51,9 @@
     <ClInclude Include="Renderer.h">
       <Filter>Source\DirectX</Filter>
     </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>Source\main\pch</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Project_BBicycle.cpp">
@@ -61,6 +67,9 @@
     </ClCompile>
     <ClCompile Include="Renderer.cpp">
       <Filter>Source\DirectX</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <Filter>Source\main\pch</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
