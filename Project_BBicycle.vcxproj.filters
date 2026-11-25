@@ -28,6 +28,9 @@
     <Filter Include="Source\main\pch">
       <UniqueIdentifier>{dbed74f6-1bca-40da-9278-ed6cdab5d378}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\main\poligon">
+      <UniqueIdentifier>{b3b40721-6fa0-4bf2-8f8e-098c1677a9ad}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -53,6 +56,9 @@
     </ClInclude>
     <ClInclude Include="pch.h">
       <Filter>Source\main\pch</Filter>
+    </ClInclude>
+    <ClInclude Include="Vertex.h">
+      <Filter>Source\main\poligon</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
