@@ -1,5 +1,6 @@
 #include "Renderer.h"
 #include"Window.h"
+#include<d3dcompiler.h>
 
 /// <summary>
 /// 初期化
@@ -21,6 +22,11 @@ bool Renderer::Initialize(HWND hWindow)
 	return true;
 }
 
+/// <summary>
+/// デバイスとスワップチェインの作成
+/// </summary>
+/// <param name="hWindow"></param>
+/// <returns></returns>
 bool  Renderer::initDeviceAndSwapChain(HWND hWindow)
 {
 	//	デバイスとスワップチェインの作成
@@ -71,6 +77,10 @@ bool  Renderer::initDeviceAndSwapChain(HWND hWindow)
 	return true;
 }
 
+/// <summary>
+///	バックバッファ設定
+/// </summary>
+/// <returns></returns>
 bool Renderer::initBackBuffer()
 {
 	HRESULT hr;
@@ -113,6 +123,81 @@ bool Renderer::initBackBuffer()
 
 }
 
+bool Renderer::CompileShader(const WCHAR* vsPath, const WCHAR* psPath, Shader& outShader)
+{
+	ID3DBlob* vsBlob = nullptr;
+	ID3DBlob* errBlob = nullptr;
+	auto pDevice = GetDevice();
+
+	//	シェーダーコンパイル
+	auto hr = D3DCompileFromFile(
+		vsPath,
+		nullptr,
+		D3D_COMPILE_STANDARD_FILE_INCLUDE,
+		"main",
+		"vs_4_0",
+		D3DCOMPILE_DEBUG | D3DCOMPILE_SKIP_OPTIMIZATION,
+		0,
+		&vsBlob,
+		&errBlob
+	);
+	if (FAILED(hr))return false;
+
+	//	頂点シェーダ作成（シェーダオブジェクト作成）
+	ID3D11VertexShader* pVertexShader = nullptr;
+	hr = pDevice->CreateVertexShader(
+		vsBlob->GetBufferPointer(),
+		vsBlob->GetBufferSize(),
+		nullptr,
+		&pVertexShader
+	);
+	if (FAILED(hr)) return false;
+
+	//	入力レイアウトオブジェクト作成
+	ID3D11InputLayout* pInputLayout = nullptr;
+	D3D11_INPUT_ELEMENT_DESC layout[] = {
+		{"POSITION",0,DXGI_FORMAT_R32G32B32_FLOAT,0,0,D3D11_INPUT_PER_VERTEX_DATA,0},
+	};
+	hr = pDevice->CreateInputLayout(
+		layout,
+		_countof(layout),
+		vsBlob->GetBufferPointer(),
+		vsBlob->GetBufferSize(),
+		&pInputLayout
+	);
+	if (FAILED(hr)) return false;
+
+	//	ピクセルシェーダー作成
+	ID3DBlob* psBlob = nullptr;
+	hr = D3DCompileFromFile(
+		psPath,
+		nullptr,
+		D3D_COMPILE_STANDARD_FILE_INCLUDE,
+		"main",
+		"ps_4_0",
+		D3DCOMPILE_DEBUG | D3DCOMPILE_SKIP_OPTIMIZATION,
+		0,
+		&psBlob,
+		&errBlob
+	);
+
+	ID3D11PixelShader* pPixelShader = nullptr;
+	hr = pDevice->CreatePixelShader(
+		psBlob->GetBufferPointer(),
+		psBlob->GetBufferSize(),
+		nullptr,
+		&pPixelShader
+	);
+	if (FAILED(hr)) return false;
+
+	outShader.pVertexShader = pVertexShader;
+	outShader.pPixelShader = pPixelShader;
+	outShader.pInputLayout = pInputLayout;
+
+	return true;
+}
+
+
 //	描画処理
 void Renderer::Draw()
 {
@@ -124,6 +209,7 @@ void Renderer::Draw()
 
 }
 
+//	バッファの変換
 void Renderer::Swap()
 {
 	//	バックバッファの表示
@@ -135,6 +221,7 @@ void Renderer::Swap()
 	}
 }
 
+//	解放処理
 void Renderer::Terminate()
 {
 	//	デバイスステートのクリア

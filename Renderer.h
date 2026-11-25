@@ -12,6 +12,8 @@ public:
 
 	bool Initialize(HWND hWindow);
 
+	bool CompileShader(const WCHAR* vsPath, const WCHAR* psPath, Shader& outShader);
+
 	void Terminate();
 
 	void Draw();
@@ -51,3 +53,16 @@ private:
 	UINT screenHeight_ = 0;
 };
 
+struct Shader
+{
+	Shader(){}
+	~Shader() {
+		DX_SAFE_RELEASE(pVertexShader);
+		DX_SAFE_RELEASE(pPixelShader);
+		DX_SAFE_RELEASE(pInputLayout);
+	}
+
+	ID3D11VertexShader* pVertexShader = nullptr;
+	ID3D11PixelShader* pPixelShader = nullptr;
+	ID3D11InputLayout* pInputLayout = nullptr;
+};
