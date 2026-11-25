@@ -5,4 +5,6 @@
 #include<DirectXMath.h>
 #define DX_SAFE_RELEASE(x)		{if(x){(x)->Release();(x)=nullptr;}}
 
+#include"Vertex.h"
+
 class Renderer;
