@@ -4,6 +4,7 @@ void Application::Initialize(HINSTANCE hInst)
 {
 	window_.Initialize(hInst);
 	renderer_.Initialize(window_.GetWindowhandle());
+	sampleTriangle_.CreateVertexBuffer(renderer_);
 }
 
 void Application::Loop()
@@ -28,6 +29,7 @@ void Application::Terminate()
 bool Application::gameLoop()
 {
 	renderer_.Draw();
+	sampleTriangle_.Draw(renderer_);
 
 	renderer_.Swap();
 

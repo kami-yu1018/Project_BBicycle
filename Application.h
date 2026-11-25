@@ -1,6 +1,7 @@
 #pragma once
 #include "Window.h"
 #include "Renderer.h"
+#include "Triangle.h"
 
 class Application
 {
@@ -16,4 +17,5 @@ private:
 private:
 	Window window_;
 	Renderer renderer_;
+	Triangle sampleTriangle_;
 };

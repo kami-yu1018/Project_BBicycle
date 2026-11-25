@@ -4,6 +4,8 @@
 #pragma comment(lib,"d3d11.lib")
 #define DX_SAFE_RELEASE(x) {if(x){(x)->Release();(x)=nullptr;}}
 
+#include"Triangle.h"
+
 struct Shader
 {
 	Shader() {}
