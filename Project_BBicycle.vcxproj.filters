@@ -80,6 +80,9 @@
     <ClCompile Include="pch.cpp">
       <Filter>Source\main\pch</Filter>
     </ClCompile>
+    <ClCompile Include="Triangle.cpp">
+      <Filter>Source\main\poligon</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Project_BBicycle.rc">

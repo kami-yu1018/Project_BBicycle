@@ -150,6 +150,7 @@
     </ClCompile>
     <ClCompile Include="Project_BBicycle.cpp" />
     <ClCompile Include="Renderer.cpp" />
+    <ClCompile Include="Triangle.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
