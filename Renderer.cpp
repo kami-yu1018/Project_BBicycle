@@ -19,6 +19,8 @@ bool Renderer::Initialize(HWND hWindow)
 
 	initBackBuffer();
 
+	CompileShader(L"VertexShader.hlsl", L"PixelShader.hlsl", DefaultShader);
+
 	return true;
 }
 
@@ -123,6 +125,13 @@ bool Renderer::initBackBuffer()
 
 }
 
+/// <summary>
+///	シェーダーコンパイルと入力レイアウトオブジェクトの作成
+/// </summary>
+/// <param name="vsPath"></param>
+/// <param name="psPath"></param>
+/// <param name="outShader"></param>
+/// <returns></returns>
 bool Renderer::CompileShader(const WCHAR* vsPath, const WCHAR* psPath, Shader& outShader)
 {
 	ID3DBlob* vsBlob = nullptr;
@@ -203,9 +212,16 @@ void Renderer::Draw()
 {
 	if (!pImmediateContext_ || !pRenderTargetView_)	return;
 
+	pImmediateContext_->OMSetRenderTargets(1, &pRenderTargetView_, nullptr);
+
 	//	青でクリア
 	float color[] = { 0.f,0.f,1.f,0.f };
 	pImmediateContext_->ClearRenderTargetView(pRenderTargetView_, color);
+
+	pImmediateContext_->IASetInputLayout(DefaultShader.pInputLayout);
+	pImmediateContext_->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+	pImmediateContext_->VSSetShader(DefaultShader.pVertexShader, nullptr, 0);
+	pImmediateContext_->PSSetShader(DefaultShader.pPixelShader, nullptr, 0);
 
 }
 
