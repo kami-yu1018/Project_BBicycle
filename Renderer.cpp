@@ -127,6 +127,55 @@ bool Renderer::initBackBuffer()
 }
 
 /// <summary>
+/// 深度/ステンシルテクスチャの作成
+/// </summary>
+/// <returns></returns>
+bool Renderer::initDepthStencilAndView()
+{
+	D3D11_TEXTURE2D_DESC descDepth;
+	descDepth.Width = screenWidth_;			//	幅
+	descDepth.Height = screenHeight_;		//	高さ
+	descDepth.MipLevels = 1;				//	ミニマップレベル
+	descDepth.ArraySize = 1;				//	配列サイズ
+	descDepth.Format = DXGI_FORMAT_D32_FLOAT;	//	フォーマット
+	descDepth.SampleDesc.Count = 1;			//	マルチサンプリングの設定
+	descDepth.SampleDesc.Quality = 0;		//	マルチサンプリングの品質
+	descDepth.Usage = D3D11_USAGE_DEFAULT;	//	デフォルト使用法
+	descDepth.BindFlags = D3D11_BIND_DEPTH_STENCIL;		//	深度/ステンシルとして使用
+	descDepth.CPUAccessFlags = 0;			//	CPUからのアクセスなし
+	descDepth.MiscFlags = 0;				//	その他設定なし
+	
+	HRESULT hr;
+	hr = pD3DDevice_->CreateTexture2D(
+		&descDepth,
+		NULL,
+		&g_pDepthStencil);
+
+	if (FAILED(hr))
+	{
+		return false;
+	}
+
+	D3D11_DEPTH_STENCIL_VIEW_DESC descDSV;
+	descDSV.Format = descDepth.Format;
+	descDSV.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2D;
+	descDSV.Flags = 0;
+	descDSV.Texture2D.MipSlice = 0;
+	
+	hr = pD3DDevice_->CreateDepthStencilView(
+		g_pDepthStencil,
+		&descDSV,
+		&g_pDepthStencilView);
+
+	if (FAILED(hr))
+	{
+		return false;
+	}
+
+	return true;
+}
+
+/// <summary>
 ///	シェーダーコンパイルと入力レイアウトオブジェクトの作成
 /// </summary>
 /// <param name="vsPath"></param>
@@ -213,7 +262,7 @@ void Renderer::Draw()
 {
 	if (!pImmediateContext_ || !pRenderTargetView_)	return;
 
-	pImmediateContext_->OMSetRenderTargets(1, &pRenderTargetView_, nullptr);
+	pImmediateContext_->OMSetRenderTargets(1, &pRenderTargetView_, g_pDepthStencilView);
 
 	//	青でクリア
 	float color[] = { 0.f,0.f,1.f,0.f };

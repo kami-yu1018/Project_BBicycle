@@ -42,6 +42,7 @@ public:
 private:
 	bool initDeviceAndSwapChain(HWND hWindow);
 	bool initBackBuffer();
+	bool initDepthStencilAndView();
 
 private:
 	//	機能レベルの配列
@@ -58,6 +59,12 @@ private:
 	ID3D11DeviceContext*		pImmediateContext_ = nullptr;
 	//	スワップチェイン
 	IDXGISwapChain*				pSwapChain_ = nullptr;
+
+	//	震度／ステンシルテクスチャを受け取る変数
+	ID3D11Texture2D* g_pDepthStencil;
+	//	深度/ステンシルビュー
+	ID3D11DepthStencilView* g_pDepthStencilView;
+
 
 	//	描画ターゲットビュー
 	ID3D11RenderTargetView*		pRenderTargetView_ = nullptr;
